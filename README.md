@@ -1,66 +1,88 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Mizani
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Mizani est une application web progressive (`PWA`) de gestion du budget personnel. Sa première version vise les salariés percevant un salaire mensuel fixe : elle les aidera à organiser leurs revenus, leurs dépenses et leur épargne, puis à suivre ce qui reste dans chaque cycle budgétaire.
 
-## About Laravel
+## État du projet
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Le socle Laravel/Breeze, l'authentification et la gestion du profil sont présents. Les fonctions financières de Mizani n'ont pas encore été développées ; le dashboard actuel est celui du socle. La définition du MVP est approuvée et la conception du domaine constitue la prochaine étape produit.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Public et périmètre du MVP V1
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+La première version cible l'usage personnel d'un salarié rémunéré chaque mois à montant fixe. L'interface sera en français, la devise de référence sera le dirham marocain (`MAD`) et les données financières seront saisies manuellement. Plusieurs personnes pourront créer un compte utilisateur, chacune accédant uniquement à ses propres données par une propriété directe liée à `user_id`. Chaque utilisateur disposera d'un seul compte financier.
 
-## Learning Laravel
+- **Cycle budgétaire :** choix, lors de la configuration initiale, entre le mois civil et la période allant d'une date de salaire à la suivante. Les détails des champs et du calcul restent à définir pendant la conception du domaine.
+- **Revenus et dépenses :** salaire mensuel fixe, revenus supplémentaires saisis au besoin, chaque dépense fixe enregistrée séparément et dépenses variables.
+- **Catégories et historique :** catégories prêtes à l'emploi et personnalisables, historique des opérations avec filtres.
+- **Opérations récurrentes :** échéance et notification ; chaque opération exige une confirmation de l'utilisateur avant son inscription dans l'historique et sa prise en compte dans le solde. Aucune comptabilisation automatique.
+- **Épargne :** montant fixe ou pourcentage du salaire, épargne générale utilisable sans objectif, et objectifs facultatifs pouvant être ajoutés ultérieurement.
+- **Dashboard et rapports :** revenus, dépenses, montant épargné et montant restant ; répartition des dépenses par catégorie, suivi du cycle courant, historique filtrable et rapports financiers simples.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Les noms des tables et champs métier ne sont pas encore fixés. La conception de la base de données suivra celle du domaine et des règles de calcul.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Hors périmètre V1
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+La connexion directe aux comptes bancaires, l'import bancaire automatique, l'intelligence artificielle, une application React Native ou native distincte, le multi-tenancy, les `organizations` et `members`, plusieurs comptes financiers par utilisateur, les transferts entre comptes, la comptabilité d'entreprise, la synchronisation financière complexe hors ligne et les rôles ou permissions multiples ne font pas partie de V1. La comptabilité professionnelle avancée n'est pas visée.
 
-## Laravel Sponsors
+## Technologies
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- PHP 8.2+ et Laravel 12 ; Laravel Breeze pour l'authentification.
+- Blade, Tailwind CSS, Alpine.js et Vite pour l'interface.
+- MySQL pour le développement local ; SQLite `:memory:` pour les tests.
 
-### Premium Partners
+## Prérequis locaux
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+PHP 8.2+, Composer, Node.js, npm et MySQL.
 
-## Contributing
+## Installation locale
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Dans PowerShell, depuis le répertoire où installer le projet :
 
-## Code of Conduct
+```powershell
+git clone https://github.com/MRMDS09/mizani.git
+Set-Location mizani
+composer install
+Copy-Item .env.example .env
+php artisan key:generate
+npm ci
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Créer une base de données locale, puis renseigner sa connexion MySQL dans `.env` sans placer d'identifiants réels dans le dépôt. Initialiser les tables standard et démarrer l'application et Vite :
 
-## Security Vulnerabilities
+```powershell
+php artisan migrate
+npm run dev
+php artisan serve
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Exécuter les deux dernières commandes dans des terminaux distincts. Les migrations actuelles ne créent pas encore de tables financières Mizani.
 
-## License
+## Tests
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```powershell
+php artisan test
+```
+
+Les tests utilisent `APP_ENV=testing` et SQLite `:memory:`. `phpunit.xml` impose ces paramètres, tandis que `tests/TestCase.php` vérifie en plus l'environnement et la connexion effective avant l'exécution. Les tests ne doivent pas être exécutés sur la base MySQL locale.
+
+## Vérifications de qualité proposées
+
+```powershell
+vendor\bin\pint --test
+composer audit --locked
+npm run build
+php artisan test
+```
+
+## Sécurité
+
+Ne jamais publier `.env`, des clés, des identifiants ou des données financières personnelles dans Git. `.env.testing` est réservé aux tests ; sa clé ne doit être réutilisée ni en développement ni en production. La vérification TLS doit rester activée pour les connexions HTTPS de PHP et Composer.
+
+## Feuille de route
+
+Après la maintenance des dépendances et la vérification du baseline : conception du domaine et des règles de calcul, conception de la base de données, configuration initiale, catégories et opérations, récurrences, épargne, dashboard et rapports, finalisation de la PWA, puis préparation de la qualité, de la sécurité et du déploiement. Les migrations métier seront créées après validation de la conception.
+
+L'état détaillé et les prochaines actions sont consignés dans [PROJECT_STATUS.md](PROJECT_STATUS.md).
+
+## Licence
+
+MIT, conformément à `composer.json`.
