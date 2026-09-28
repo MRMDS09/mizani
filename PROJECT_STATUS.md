@@ -9,7 +9,7 @@ Le socle technique est en place. Le projet passe maintenant à la définition du
 ## Référence Git
 
 - Baseline sur `main` : commit `3c565ba`.
--- Branche de travail utilisée pour formaliser le périmètre V1 : `chore/define-mizani-mvp`.
+- Branche de travail utilisée pour formaliser le périmètre V1 : `chore/define-mizani-mvp`.
 
 ## Socle technique réalisé
 
